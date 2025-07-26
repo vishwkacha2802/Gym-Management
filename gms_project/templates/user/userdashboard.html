@@ -1,0 +1,336 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFusion Gym | Member Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'user/css/dashboard.css'%}" />
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        {% csrf_token %}
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center">
+                <img src="https://placehold.co/100x50" alt="FitFusion Gym Logo with blue and green gradient text" class="mr-4">
+                <h1 class="text-2xl font-bold text-gray-800">Member Dashboard</h1>
+            </div>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button class="p-2 rounded-full bg-white shadow">
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </button>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </div>
+                <div class="flex items-center">
+                    <img src="https://placehold.co/40x40" alt="User profile picture showing a smiling gym member" class="rounded-full mr-2">
+                    <span class="font-medium text-gray-700">{{ user.username }}</span>
+                </div>
+                <div>
+                    <a href="{% url 'logout' %}" class="flex flex-col items-center justify-center p-4 rounded-lg bg-green-50 text-blue-600 hover:bg-blue-100 transition">logout</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- User Stats Column -->
+            <div class="space-y-6">
+                <!-- Membership Card -->
+                <div class="bg-white rounded-xl shadow p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Membership</h2>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Active</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4">
+                            <svg class="h-20 w-20" viewBox="0 0 100 100">
+                                <circle class="text-gray-200" cx="50" cy="50" r="40" stroke-width="8" fill="transparent"></circle>
+                                <circle class="progress-ring__circle text-blue-500" cx="50" cy="50" r="40" stroke-width="8" stroke-dashoffset="100" fill="transparent"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-gray-600 mb-1">Days Left</div>
+                            <div class="text-3xl font-bold text-gray-800">182</div>
+                            <div class="text-gray-500 text-sm">Expires on: 15 Jan 2026</div>
+                        </div>
+                    </div>
+                    <!-- <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-300">Renew Membership</button> -->
+                </div>
+
+                <!-- Progress Card -->
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Progress</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Weight</span>
+                                <span class="font-medium">75kg (-5kg)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Muscle Mass</span>
+                                <span class="font-medium">28% (+3%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">BMI</span>
+                                <span class="font-medium">24.1 (-1.2)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Column -->
+            <!-- <div class="space-y-6">
+                 Quick Actions
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <button class="flex flex-col items-center justify-center p-4 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition">
+                            <i class="fas fa-calendar-day text-2xl mb-2"></i>
+                            <span class="text-sm font-medium">Book Class</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-4 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition">
+                            <i class="fas fa-dumbbell text-2xl mb-2"></i>
+                            <span class="text-sm font-medium">Start Workout</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-4 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 transition">
+                            <i class="fas fa-chart-line text-2xl mb-2"></i>
+                            <span class="text-sm font-medium">Progress</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-4 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition">
+                            <i class="fas fa-user-tie text-2xl mb-2"></i>
+                            <span class="text-sm font-medium">Trainer</span>
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- Upcoming Classes -->
+                <div class="bg-white rounded-xl shadow p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Upcoming Classes</h2>
+                        <!-- <button class="text-blue-600 hover:text-blue-800 font-medium">View All</button> -->
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-blue-50 transition">
+                            <div class="bg-blue-100 text-blue-800 rounded-lg p-3 mr-4">
+                                <i class="fas fa-fire text-xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-medium text-gray-800">HIIT Burn</h3>
+                                <p class="text-sm text-gray-500">Tomorrow, 7:00 AM - 8:00 AM</p>
+                            </div>
+                            <!-- <button class="text-sm font-medium text-blue-600 hover:text-blue-800">Join</button> -->
+                        </div>
+                        <div class="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-orange-50 transition">
+                            <div class="bg-orange-100 text-orange-800 rounded-lg p-3 mr-4">
+                                <i class="fas fa-water text-xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-medium text-gray-800">Yoga Flow</h3>
+                                <p class="text-sm text-gray-500">Monday, 6:30 PM - 7:30 PM</p>
+                            </div>
+                            <!-- <button class="text-sm font-medium text-blue-600 hover:text-blue-800">Join</button> -->
+                        </div>
+                        <div class="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-purple-50 transition">
+                            <div class="bg-purple-100 text-purple-800 rounded-lg p-3 mr-4">
+                                <i class="fas fa-running text-xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-medium text-gray-800">Spin Class</h3>
+                                <p class="text-sm text-gray-500">Wednesday, 7:30 AM - 8:00 AM</p>
+                            </div>
+                            <!-- <button class="text-sm font-medium text-blue-600 hover:text-blue-800">Join</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Workouts -->
+                <div class="bg-white rounded-xl shadow p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Recent Workouts</h2>
+                        <!-- <button class="text-blue-600 hover:text-blue-800 font-medium">View All</button> -->
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border border-gray-100 rounded-lg p-4 workout-card transition">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-medium text-gray-800">Full Body Strength</h3>
+                                <span class="text-sm text-gray-500">Yesterday</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600 mb-3">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>45 minutes</span>
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-bolt mr-1"></i>
+                                <span>450 kcal</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Squats</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Deadlifts</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Bench Press</span>
+                            </div>
+                        </div>
+                        <div class="border border-gray-100 rounded-lg p-4 workout-card transition">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-medium text-gray-800">Cardio Blast</h3>
+                                <span class="text-sm text-gray-500">2 days ago</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600 mb-3">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>60 minutes</span>
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-bolt mr-1"></i>
+                                <span>620 kcal</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Treadmill</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Rowing</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Jump Rope</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-6">
+                <!-- Personal Trainer -->
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Trainer</h2>
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/80x80" alt="Professional gym trainer wearing workout clothes and smiling" class="rounded-full mr-4">
+                        <div>
+                            <h3 class="font-bold text-gray-800">Dhruv Vyas</h3>
+                            <p class="text-sm text-gray-600">Certified Personal Trainer</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <!-- <div class="flex justify-between">
+                            <span class="text-gray-600">Next Session:</span>
+                            <span class="font-medium text-gray-800">Tuesday, 10 AM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Focus Area:</span>
+                            <span class="font-medium text-gray-800">Strength</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Program:</span>
+                            <span class="font-medium text-gray-800">Power Builder</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium transition duration-300">Message Trainer</button> -->
+                </div>
+
+                <!-- Achievement Badges -->
+                <!-- <div class="bg-white rounded-xl shadow p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Achievements</h2>
+                        <span class="text-sm text-gray-600">12/50</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-trophy text-yellow-500"></i>
+                            </div>
+                            <span class="text-xs text-center">10 Workouts</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-fire text-blue-500"></i>
+                            </div>
+                            <span class="text-xs text-center">Cardio Pro</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-dumbbell text-purple-500"></i>
+                            </div>
+                            <span class="text-xs text-center">Strength</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-calendar-alt text-green-500"></i>
+                            </div>
+                            <span class="text-xs text-center">Consistency</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-medal text-orange-500"></i>
+                            </div>
+                            <span class="text-xs text-center">5kg Lost</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-heart text-red-500"></i>
+                            </div>
+                            <span class="text-xs text-center">Healthy Heart</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 rounded-lg font-medium transition duration-300">View All</button>
+                </div> -->
+
+                <!-- Nutrition Tips -->
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Nutrition Tip</h2>
+                    <img src="https://placehold.co/400x200" alt="Healthy balanced meal with grilled chicken, quinoa, and vegetables on a white plate" class="rounded-lg mb-4">
+                    <h3 class="font-medium text-gray-800 mb-2">Protein-Packed Post-Workout Meal</h3>
+                    <p class="text-gray-600 text-sm mb-4">Combine lean protein with complex carbs within 30 minutes after training for optimal muscle recovery.</p>
+                    <!-- <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-300">View Meal Plan</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animate progress circles
+        document.addEventListener('DOMContentLoaded', function() {
+            const circles = document.querySelectorAll('.progress-ring__circle');
+            circles.forEach(circle => {
+                const radius = circle.r.baseVal.value;
+                const circumference = radius * 2 * Math.PI;
+                const offset = circumference - (182/365) * circumference;
+                
+                circle.style.strokeDasharray = `${circumference} ${circumference}`;
+                circle.style.strokeDashoffset = offset;
+            });
+        });
+
+        // Make workout cards clickable
+        document.querySelectorAll('.workout-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // In a real app, this would navigate to workout details
+                alert('Viewing workout details');
+            });
+        });
+    </script>
+</body>
+</html>

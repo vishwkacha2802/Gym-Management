@@ -1,0 +1,78 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trainer Login - FitZone Gym</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'trainer/css/mycss.css' %}">
+</head>
+<body>
+
+  <!-- 🔴 Background Image Overlay -->
+  <div class="bg-panel"></div>
+
+  <!-- 🟡 Particles Animation -->
+  <div id="particles-js"></div>
+
+  <!-- 🟢 Registration Form -->
+  <div class="register-card">
+    <h2>Train Like CBum</h2>
+
+  <div class="login-bg">
+    <div class="login-container">
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <form class="login-form" method="POST" action="{% url 'login_check' %}">
+        {% csrf_token %}
+        <h2>Trainer Login</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Login</button>
+        <p class="form-link">Don't have an account? Login here <a href="{% url 'register'%}" action = "POST"> Register here</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- 🟣 Particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60 },
+        color: { value: "#5744ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 2 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+</html>

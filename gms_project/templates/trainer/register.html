@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Register | Gym</title>
+
+  <!-- Custom CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'trainer/css/register.css' %}">
+
+  <!-- Optional inline background if CSS fails -->
+</head>
+<body class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+
+  <!-- 🔴 Background Image Overlay -->
+  <div class="bg-panel"></div>
+
+  <!-- 🟡 Particles Animation -->
+  <div id="particles-js"></div>
+
+  <!-- 🟢 Registration Form -->
+  <div class="register-card">
+    <h2>Train Like CBum</h2>
+
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="text-center text-3xl font-extrabold text-white">Trainer Register</h2>
+    </div>
+    <div class="register-form-wrapper">
+    <form action="../../trainer/register" method="POST">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 gap-4">
+        <div>
+          <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+          <input id="first_name" name="first_name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div>
+          <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+          <input id="last_name" name="last_name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input id="email" name="email" type="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+          <input id="username" name="username" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input id="password" name="password" type="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div>
+          <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <input id="confirm_password" name="confirm_password" type="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div>
+          <button type="submit" class="w-full py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md shadow-md text-sm font-medium">Register</button>
+        </div>
+        <div>
+          <p class="mt-2 text-center text-sm text-gray-300">
+            Already have an account?
+            <a href="../../trainer/login" class="font-medium text-yellow-400 hover:text-yellow-500">Login here</a>
+          </p>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+  <!-- 🟣 Particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60 },
+        color: { value: "#5744ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 2 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+</html>

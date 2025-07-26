@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Portal - Login Selection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'home/css/homecss.css'%}"/>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Fitness Portal</h1>
+            <p>Please select your login option below</p>
+        </div>
+       
+        <div class="login-options">
+            <a method = "POST" href="{% url 'login' %}" >
+                <!-- class="option-card trainer-card" -->
+                <div class="card-header">
+                    <div class="card-icon trainer-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="card-title">
+                        <h2>Trainer Login</h2>
+                        <p>For professional trainers</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Access your dashboard to manage clients, create workout plans, and track client progress with our advanced tools.</p>
+                </div>
+                <button class="login-btn trainer-btn">Login as Trainer</button>
+            </a>
+           
+            <a method = "POST" href="{% url 'userlogin' %}">
+                <!-- class="option-card user-card" -->
+                <div class="card-header">
+                    <div class="card-icon user-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="card-title">
+                        <h2>User Login</h2>
+                        <p>For fitness enthusiasts</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>View your personalized workout plans, track your progress, and connect with your trainer through our interactive platform.</p>
+                </div>
+                <button class="login-btn user-btn">Login as User</button>
+            </a>
+        </div>
+       
+        <div class="footer">
+            <p>Having trouble logging in? <a href="#" style="color: var(--primary-color); text-decoration: none;">Contact support</a></p>
+        </div>
+    </div>
+</body>
+</html>

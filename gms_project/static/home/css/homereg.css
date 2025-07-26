@@ -1,0 +1,148 @@
+/* homecss.css */
+
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #2c3e50;
+  --trainer-color: #2980b9;
+  --user-color: #8e44ad;
+  --bg-light: #f4f4f4;
+  --white: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: var(--white);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow);
+  max-width: 900px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+}
+
+.header p {
+  color: #666;
+  margin-top: 10px;
+}
+
+.login-options {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.login-options a {
+  flex: 1;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 6px var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.login-options a:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px var(--shadow);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  color: var(--primary-color);
+}
+
+.trainer-icon {
+  color: var(--trainer-color);
+}
+
+.user-icon {
+  color: var(--user-color);
+}
+
+.card-title h2 {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+}
+
+.card-title p {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.card-content {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.login-btn {
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  color: #fff;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.trainer-btn {
+  background-color: var(--trainer-color);
+}
+
+.trainer-btn:hover {
+  background-color: #1f5f90;
+}
+
+.user-btn {
+  background-color: var(--user-color);
+}
+
+.user-btn:hover {
+  background-color: #6d2f91;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.95rem;
+}

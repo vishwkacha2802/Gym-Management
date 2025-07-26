@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* particles.js layer */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Background panel with CBUM image */
+.bg-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('user/cbum_bg.jpg') center center / cover no-repeat fixed;
+  filter: brightness(0.3);
+  z-index: 0;
+}
+
+/* Form card styling */
+.register-card {
+  position: center;
+  z-index: 1;
+  width: 400px;
+  margin: 8% auto;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 20px #1a2980;
+  animation: fadeInUp 1s ease-out;
+}
+
+h2 {
+  text-align: center;
+  color: #1a2980;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 150px;
+  margin-top: 15px;
+}
+
+.register-form-wrapper{
+  margin-top: 15px;
+}
+
+.label, label {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+
+input {
+  width: 95%;
+  padding: 12px;
+  background: #222;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  /* margin-top: 15px; */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  background: #1a2980;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 15px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #1a2980;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.login-link a {
+  color: #1a2980;
+  text-decoration: none;
+}
+
+/* Flash messages styling */
+.messages li {
+  background: #222;
+  color: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  list-style: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

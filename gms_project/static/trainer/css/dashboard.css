@@ -1,0 +1,131 @@
+:root {
+    --primary: #3b82f6;
+    --secondary: #1e40af;
+    --accent: #10b981;
+    --light: #f8fafc;
+    --dark: #0f172a;
+}
+
+.sidebar {
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+        position: fixed;
+        z-index: 1000;
+        height: 100vh;
+    }
+    .sidebar.active {
+        width: 250px;
+    }
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+    .sidebar-overlay.active {
+        display: block;
+    }
+}
+
+.progress-circle {
+    --size: 120px;
+    --bar-width: 8px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.progress-circle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(var(--accent) var(--progress), #e2e8f0 0);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--bar-width)), #fff calc(100% - var(--bar-width)));
+    mask: radial-gradient(farthest-side, transparent calc(100% - var(--bar-width)), #fff calc(100% - var(--bar-width)));
+}
+
+.client-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.workout-item:hover {
+    background-color: #f1f5f9;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+[data-tooltip]:hover::after {
+    visibility: visible;
+    opacity: 1;
+    bottom: calc(100% + 5px);
+}
+
+.calendar-day:hover {
+    background-color: #e0f2fe;
+}
+
+.calendar-day.today {
+    background-color: #dbeafe;
+}
+
+.calendar-day.has-events {
+    position: relative;
+}
+
+.calendar-day.has-events::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
